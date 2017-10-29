@@ -16,20 +16,23 @@ class ApiController extends Controller
      */
     public function index()
     {
-        $data[0] = array(
+        $data = array();
+
+        $data[] = array(
             "href" => '/loc',
             "rel" => 'list',
             "method" => 'GET');
 
-        $data[1] = array(
+        $data[] = array(
             "href" => '/loc',
             "rel" => 'create',
             "method" => 'POST');
 
-        $data[2] = array(
+        $data[] = array(
             "href" => '/loc/{id}',
             "rel" => 'show',
             "method" => 'GET');
+
 
         $response = [
             'Success' => true,
@@ -78,7 +81,7 @@ class ApiController extends Controller
             //check if location is exist
             if($locations) {
 
-                $data = array("title" => "You are already verified",
+                $data[] = array("title" => "You are already verified",
                     "detail" => "You are verified, there is no need for verify again.",
                     "code" => 500);
 
@@ -89,7 +92,7 @@ class ApiController extends Controller
             }
             else{
 
-                $data = array('content' => "SMS code re-sent successfully");
+                $data[] = array('content' => "SMS code re-sent successfully");
 
                 $response = [
                     'Success' => true,
@@ -120,11 +123,8 @@ class ApiController extends Controller
         $data = [];
 
         if(count($locations) > 0) {
-            foreach ($locations as $loc) {
-                $data[$loc->id]['id'] = $loc->id;
-                $data[$loc->id]['title'] = $loc->title;
-                $data[$loc->id]['lat'] = $loc->lat;
-                $data[$loc->id]['ing'] = $loc->ing;
+            foreach ($locations as $key => $value) {
+                $data[$key] = $value;
             }
         }else{
             $response = [
@@ -165,11 +165,12 @@ class ApiController extends Controller
         $data = [];
 
         if($loc) {
-            $data[$loc->id]['id'] = $loc->id;
-            $data[$loc->id]['title'] = $loc->title;
-            $data[$loc->id]['lat'] = $loc->lat;
-            $data[$loc->id]['ing'] = $loc->ing;
-
+            $data[] = array(
+                'id'=>$loc->id,
+                'title'=>$loc->title,
+                'lat'=>$loc->lat,
+                'ing'=>$loc->ing
+            );
 
             $response = [
                 'Success' => true,
