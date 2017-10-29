@@ -16,7 +16,7 @@
                     </div>
                 @endif
                 <div class="panel-body">
-                    <form method="post" action="/api">
+                    <form method="post" action="/api/loc">
                         {{Csrf_field()}}
                         <label>Title :</label>
                         <br>
