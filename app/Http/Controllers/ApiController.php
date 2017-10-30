@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use Mapper;
 use App\Location;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Response;
@@ -107,6 +108,8 @@ class ApiController extends Controller
 
                 $location->save();
             }
+
+            Mapper::map(53.381128999999990000, -1.470085000000040000);
 
             return Response::json($response);
         }

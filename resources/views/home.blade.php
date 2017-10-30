@@ -40,6 +40,12 @@
 
                         <input class="btn btn-primary" type="submit" value="Submit">
                     </form>
+                    <hr>
+                    <div style="width: 700px; height: 600px;">
+                        {!! Mapper::render() !!}
+                    </div>
+
+
                 </div>
             </div>
         </div>

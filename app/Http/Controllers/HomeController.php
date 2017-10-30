@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Cornford\Googlmapper\Facades\MapperFacade as Mapper;
 
 class HomeController extends Controller
 {
@@ -23,6 +24,10 @@ class HomeController extends Controller
      */
     public function index()
     {
+
+        Mapper::map(35.7599644 , 51.40986264,['zoom' => 15, 'markers' => ['title' => 'My Location', 'animation' => 'DROP']]);
+
+
         return view('home');
     }
 }
