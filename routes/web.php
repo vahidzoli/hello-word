@@ -28,6 +28,8 @@ Route::group(['prefix' => '/api'], function () {
 
     Route::get('/create' , 'HomeController@index');
 
+    Route::get('/near' , 'ApiController@nearby');
+
     Route::post('/loc', 'ApiController@create');
 
     Route::get('/loc', 'ApiController@show_list');
