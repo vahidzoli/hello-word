@@ -34,4 +34,8 @@ Route::group(['prefix' => '/api'], function () {
 
     Route::get('/loc/{id}' , 'ApiController@show_one');
 
+    Route::PUT('/loc/update/{id}' , 'ApiController@update');
+
+    Route::DELETE('/loc/delete/{id}' , 'ApiController@destroy');
+
 });

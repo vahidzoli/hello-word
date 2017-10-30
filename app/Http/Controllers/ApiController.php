@@ -141,14 +141,56 @@ class ApiController extends Controller
     }
 
     /**
-     * Show the form for editing the specified resource.
+     * Show the form for Update the specified resource.
      *
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function update($id)
     {
-        //
+        $loc = Location::find($id);
+
+        $data = [];
+
+        if(count($loc) > 0) {
+
+            if($loc->title == 'Home' && $loc->lat =='23.32') {
+
+                $loc->title = 'Street';
+
+                $loc->update();
+
+                $data[] = array(
+                    'id'=>$loc->id,
+                    'title'=>$loc->title,
+                    'lat'=>$loc->lat,
+                    'ing'=>$loc->ing
+                );
+
+                $response = [
+                    'Success' => true,
+                    'message' => 'Successfully update',
+                    'Data' => $data
+                ];
+
+            }else{
+                $response = [
+                    'Success' => false,
+                    'content' => 'you can update this!'
+                ];
+            }
+
+        }else{
+            $response = [
+                'Success' => false,
+                'content' => 'there is no location!'
+            ];
+        }
+
+
+
+        return Response::json($response);
+
     }
 
     /**
@@ -199,6 +241,15 @@ class ApiController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $loc = Location::find($id);
+
+        $loc->delete();
+
+        $response = [
+            'Success' => true,
+            'message' => 'Successfully Deleted...',
+        ];
+
+        return Response::json($response);
     }
 }

@@ -18,6 +18,8 @@
                 <div class="panel-body">
                     <form method="post" action="/api/loc">
                         {{Csrf_field()}}
+                        <input type="hidden" name="_method" value="DELETE" >
+
                         <label>Title :</label>
                         <br>
                         <input class="form-control" type="text" name="title" placeholder="title">
