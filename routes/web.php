@@ -17,27 +17,33 @@ Route::get('/', function () {
 
 Auth::routes();
 
-Route::get('/home', 'HomeController@index')->name('home');
-
-//Route::post('/api', 'LocationController@index');
+//Route::get('/home', 'HomeController@index')->name('home');
 
 
 Route::group(['prefix' => '/api'], function () {
 
+    //Menu
     Route::get('/', 'ApiController@index');
 
+    //show form
     Route::get('/create' , 'HomeController@index');
 
-    Route::get('/near' , 'ApiController@nearby');
-
+    //create new location
     Route::post('/loc', 'ApiController@create');
 
+    //location list
     Route::get('/loc', 'ApiController@show_list');
 
+    //show one location
     Route::get('/loc/{id}' , 'ApiController@show_one');
 
+    //update one location
     Route::PUT('/loc/update/{id}' , 'ApiController@update');
 
+    //delete one direction
     Route::DELETE('/loc/delete/{id}' , 'ApiController@destroy');
+
+    //show near car on map
+    Route::get('/near' , 'ApiController@nearby');
 
 });

@@ -19,7 +19,7 @@
                     <form method="post" action="/api/loc">
                         {{Csrf_field()}}
                         <input type="hidden" name="_method" value="DELETE" >
-
+                        <input type="hidden" name="_method" value="PUT" >
                         <label>Title :</label>
                         <br>
                         <input class="form-control" type="text" name="title" placeholder="title">
@@ -40,12 +40,6 @@
 
                         <input class="btn btn-primary" type="submit" value="Submit">
                     </form>
-                    <hr>
-                    <div style="width: 700px; height: 600px;">
-                        {!! Mapper::render() !!}
-                    </div>
-
-
                 </div>
             </div>
         </div>

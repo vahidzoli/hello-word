@@ -34,7 +34,6 @@ class ApiController extends Controller
             "rel" => 'show',
             "method" => 'GET');
 
-
         $response = [
             'Success' => true,
             'version' => '1.0',
@@ -108,8 +107,6 @@ class ApiController extends Controller
 
                 $location->save();
             }
-
-            Mapper::map(53.381128999999990000, -1.470085000000040000);
 
             return Response::json($response);
         }
@@ -256,6 +253,7 @@ class ApiController extends Controller
         return Response::json($response);
     }
 
+
     public function nearby()
     {
 
@@ -285,7 +283,7 @@ class ApiController extends Controller
 
         $res = json_decode($response);
 
-        Mapper::map(35.75986646,51.40951362,['zoom' => 19, 'marker' => false]);
+        Mapper::map(35.75986646,51.40951362,['zoom' => 20, 'marker' => false]);
 
         foreach ($res->data as $key=>$value){
                 foreach ($value->nearby as $k=>$val){
@@ -302,6 +300,6 @@ class ApiController extends Controller
 //            //return Response::json($response);
 //        }
 
-        return view('home');
+        return view('near');
     }
 }
