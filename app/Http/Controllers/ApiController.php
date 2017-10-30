@@ -289,7 +289,9 @@ class ApiController extends Controller
 
         foreach ($res->data as $key=>$value){
                 foreach ($value->nearby as $k=>$val){
-                    Mapper::marker($val->latitude,$val->longitude,['markers' => ['symbol' => 'circle', 'scale' => 1000, 'animation' => 'DROP']]);
+//                    Mapper::marker($val->latitude,$val->longitude,['markers' => ['icon' => $val->parent_icon, 'scale' => 1000, 'animation' => 'DROP']]);
+                    Mapper::informationWindow($val->latitude,$val->longitude, 'Content', ['icon' => $val->parent_icon, 'scale' => 1000]);
+
                 }
         }
 
