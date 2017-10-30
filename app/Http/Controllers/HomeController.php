@@ -29,7 +29,8 @@ class HomeController extends Controller
 
 //        Mapper::map(35.7600092958542,51.409870348870754,['zoom' => 15, 'markers' => ['title' => 'My Location', 'animation' => 'DROP']]);
 
-        Mapper::map(35.7600092958542,51.409870348870754,['zoom' => 15, 'markers' => ['title' => 'My Location', 'animation' => 'DROP']]);
+//        Mapper::map(35.7600092958542,51.409870348870754,['zoom' => 15, 'markers' => ['title' => 'My Location', 'animation' => 'DROP']]);
+
 
         return view('home');
     }

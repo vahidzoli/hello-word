@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use Mapper;
+use Cornford\Googlmapper\Facades\MapperFacade as Mapper;
 use App\Location;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Response;
@@ -283,10 +283,23 @@ class ApiController extends Controller
 
         curl_close($curl);
 
-        if ($err) {
-            echo "cURL Error #:" . $err;
-        } else {
-            return Response::json($response);
+        $res = json_decode($response);
+
+        Mapper::map(35.75986646,51.40951362,['zoom' => 19, 'marker' => false]);
+
+        foreach ($res->data as $key=>$value){
+                foreach ($value->nearby as $k=>$val){
+                    Mapper::marker($val->latitude,$val->longitude,['markers' => ['symbol' => 'circle', 'scale' => 1000, 'animation' => 'DROP']]);
+                }
         }
+
+
+//        if ($err) {
+//            echo "cURL Error #:" . $err;
+//        } else {
+//            //return Response::json($response);
+//        }
+
+        return view('home');
     }
 }
