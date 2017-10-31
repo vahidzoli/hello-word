@@ -2,8 +2,6 @@
 
 namespace App\Http\Controllers;
 
-use Cornford\Googlmapper\Facades\MapperFacade as Mapper;
-use Response;
 
 class HomeController extends Controller
 {

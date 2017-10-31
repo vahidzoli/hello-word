@@ -21,17 +21,32 @@ class ApiController extends Controller
 
         $data[] = array(
             "href" => '/loc',
-            "rel" => 'list',
+            "rel" => 'location list',
+            "method" => 'GET');
+
+        $data[] = array(
+            "href" => '/add',
+            "rel" => 'add location',
             "method" => 'GET');
 
         $data[] = array(
             "href" => '/loc',
-            "rel" => 'create',
+            "rel" => 'create location and save',
             "method" => 'POST');
 
         $data[] = array(
             "href" => '/loc/{id}',
-            "rel" => 'show',
+            "rel" => 'show one location',
+            "method" => 'GET');
+
+        $data[] = array(
+            "href" => '/edit/{id}',
+            "rel" => 'edit location',
+            "method" => 'GET');
+
+        $data[] = array(
+            "href" => '/loc/near',
+            "rel" => 'show car available',
             "method" => 'GET');
 
         $response = [
@@ -41,6 +56,12 @@ class ApiController extends Controller
         ];
 
         return Response::json($response);
+    }
+
+    //show add location's form
+    public function add()
+    {
+        return view('home');
     }
 
     /**
@@ -55,8 +76,8 @@ class ApiController extends Controller
          */
         $validator = Validator::make($request->all(), [
             'title' => 'required|max:255',
-            'lat' => 'required|between:0,99.99',
-            'ing' => 'required|regex:/^[0-9]+(\.[0-9][0-9]?)?$/'
+            'lat' => 'required|regex:/[+-]?([0-9]*[.])?[0-9]+/',
+            'ing' => 'required|regex:/[+-]?([0-9]*[.])?[0-9]+/'
         ]);
 
         /*
@@ -140,6 +161,23 @@ class ApiController extends Controller
         return Response::json($response);
     }
 
+    public function edit($id)
+    {
+        $loc = Location::find($id);
+
+        if($loc){
+            $location = $loc;
+        }else{
+            $response = [
+                'Success' => false,
+                'content' => 'there is no location!'
+            ];
+
+            return Response::json($response);
+        }
+
+        return view('edit',compact('location'));
+    }
     /**
      * Show the form for Update the specified resource.
      *
@@ -176,7 +214,7 @@ class ApiController extends Controller
             }else{
                 $response = [
                     'Success' => false,
-                    'content' => 'you can update this!'
+                    'content' => 'you can\'t update this!'
                 ];
             }
 
@@ -186,8 +224,6 @@ class ApiController extends Controller
                 'content' => 'there is no location!'
             ];
         }
-
-
 
         return Response::json($response);
 
@@ -279,26 +315,23 @@ class ApiController extends Controller
         $response = curl_exec($curl);
         $err = curl_error($curl);
 
-        curl_close($curl);
+        if($err){
+            echo "cURL Error #:" . $err;
+        }else{
+            $res = json_decode($response);
 
-        $res = json_decode($response);
+            Mapper::map(35.75986646,51.40951362,['zoom' => 20, 'marker' => false]);
 
-        Mapper::map(35.75986646,51.40951362,['zoom' => 20, 'marker' => false]);
-
-        foreach ($res->data as $key=>$value){
+            foreach ($res->data as $key=>$value){
                 foreach ($value->nearby as $k=>$val){
 //                    Mapper::marker($val->latitude,$val->longitude,['markers' => ['icon' => $val->parent_icon, 'scale' => 1000, 'animation' => 'DROP']]);
                     Mapper::informationWindow($val->latitude,$val->longitude, 'Content', ['icon' => $val->parent_icon, 'scale' => 1000]);
 
                 }
+            }
         }
 
-
-//        if ($err) {
-//            echo "cURL Error #:" . $err;
-//        } else {
-//            //return Response::json($response);
-//        }
+        curl_close($curl);
 
         return view('near');
     }

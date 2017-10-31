@@ -26,24 +26,27 @@ Route::group(['prefix' => '/api'], function () {
     Route::get('/', 'ApiController@index');
 
     //show form
-    Route::get('/create' , 'HomeController@index');
+    Route::get('add' , 'ApiController@add');
+
+    //edit form
+    Route::get('edit/{id}' , 'ApiController@edit');
 
     //create new location
-    Route::post('/loc', 'ApiController@create');
+    Route::post('loc', 'ApiController@create');
 
     //location list
-    Route::get('/loc', 'ApiController@show_list');
+    Route::get('loc', 'ApiController@show_list');
 
     //show one location
-    Route::get('/loc/{id}' , 'ApiController@show_one');
+    Route::get('loc/{id}' , 'ApiController@show_one');
 
     //update one location
-    Route::PUT('/loc/update/{id}' , 'ApiController@update');
+    Route::PUT('edit/{id}/update' , 'ApiController@update');
 
     //delete one direction
-    Route::DELETE('/loc/delete/{id}' , 'ApiController@destroy');
+    Route::DELETE('loc/{id}/delete' , 'ApiController@destroy');
 
     //show near car on map
-    Route::get('/near' , 'ApiController@nearby');
+    Route::get('near' , 'ApiController@nearby');
 
 });

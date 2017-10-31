@@ -18,8 +18,7 @@
                 <div class="panel-body">
                     <form method="post" action="/api/loc">
                         {{Csrf_field()}}
-                        <input type="hidden" name="_method" value="DELETE" >
-                        <input type="hidden" name="_method" value="PUT" >
+
                         <label>Title :</label>
                         <br>
                         <input class="form-control" type="text" name="title" placeholder="title">
@@ -28,13 +27,13 @@
                             <div class="col-md-6">
                                 <label>Lat :</label>
                                 <br>
-                                <input class="form-control" type="number" name="lat" step="0.01" placeholder="ex 0.01">
+                                <input class="form-control" type="number" step="any" name="lat">
                                 <br>
                             </div>
                             <div class="col-md-6">
                                 <label>Ing :</label>
                                 <br>
-                                <input class="form-control" type="number" name="ing" step="0.01" placeholder="ex 0.01">
+                                <input class="form-control" type="number" step="any" name="ing">
                             </div>
                         </div>
 
