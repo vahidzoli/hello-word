@@ -7,7 +7,7 @@
                 <div class="panel panel-primary">
                     <div class="panel-heading">Favorite locations API</div>
                     <div class="panel-body">
-                        <div style="width: 900px; height: 600px;">
+                        <div id="map" style="width: 900px; height: 600px;">
                             {!! Mapper::render() !!}
                         </div>
                     </div>

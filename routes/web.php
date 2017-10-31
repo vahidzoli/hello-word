@@ -49,4 +49,7 @@ Route::group(['prefix' => '/api'], function () {
     //show near car on map
     Route::get('near' , 'ApiController@nearby');
 
+
+    Route::get('ajax' , 'ApiController@ajax');
+
 });

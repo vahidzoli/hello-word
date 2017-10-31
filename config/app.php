@@ -168,7 +168,7 @@ return [
          */
         Laravel\Tinker\TinkerServiceProvider::class,
         Cornford\Googlmapper\MapperServiceProvider::class,
-
+        NotificationChannels\PusherPushNotifications\PusherPushNotificationsServiceProvider::class,
         /*
          * Application Service Providers...
          */
