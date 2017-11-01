@@ -364,7 +364,7 @@ class ApiController extends Controller
             }
         }
 
-
+        dd($result);
         return json_encode($result);
 
     }

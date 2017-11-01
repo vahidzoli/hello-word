@@ -75,20 +75,17 @@
     </div>
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-    {{--<script async defer--}}
-            {{--src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAtqWsq5Ai3GYv6dSa6311tZiYKlbYT4mw&callback=initMap">--}}
-    {{--</script>--}}
+
     <script type="text/javascript">
 
         google.maps.event.addDomListener(window, 'load', new function() {
             setTimeout(function () {
                 google.maps.event.addListener(maps[0].map, 'click', function(event) {
                     maps[0].markers[0].setPosition(event.latLng);
+                    maps[0].map.setCenter({lat: event.latLng.lat(), lng: event.latLng.lng()});
+                    maps[0].map.setZoom(18);
 
                     $.ajax({
-                        headers: {
-                            'X-CSRF-Token' : $('meta[name=csrf-token]').attr('content')
-                        },
                         type: "GET",
                         url: '/api/ajax',
                         data: {
@@ -109,28 +106,27 @@
                                 setMap: maps[0]
                             });
 
-                            $.each(result.cars ,function (key,value) {
-//                                var lat = parseFloat(35.75986646);
-//                                var lng = parseFloat(51.40951362);
-
-                                var location = {lat: 35.7600092958542, lng: 51.409870348870754};
-
-                                var marker = new google.maps.Marker({
-                                    position: location,
-                                    setMap: maps[0]
-                                });
-                            })
+//                            $.each(result.cars ,function (key,value) {
+////                                var lat = parseFloat(35.75986646);
+////                                var lng = parseFloat(51.40951362);
+//
+//                                var location = {lat: 35.7600092958542, lng: 51.409870348870754};
+//
+//                                var marker = new google.maps.Marker({
+//                                    position: location,
+//                                    setMap: maps[0],
+//                                      icon: image,
+//                                      shape: shape,
+//                                      title: beach[0],
+////                                });
+//                            })
                         }
                     });
-
                 });
             }, 500);
         });
 
     </script>
-    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAtqWsq5Ai3GYv6dSa6311tZiYKlbYT4mw&callback=initMap"
-            async defer></script>
-
 
 </body>
 </html>
