@@ -10,10 +10,10 @@ class HomeController extends Controller
      *
      * @return void
      */
-    public function __construct()
-    {
-        $this->middleware('auth');
-    }
+//    public function __construct()
+//    {
+//        $this->middleware('auth');
+//    }
 
     /**
      * Show the application dashboard.
@@ -30,6 +30,6 @@ class HomeController extends Controller
 //        Mapper::map(35.7600092958542,51.409870348870754,['zoom' => 15, 'markers' => ['title' => 'My Location', 'animation' => 'DROP']]);
 
 
-        return view('home');
+//        return view('test');
     }
 }

@@ -9,6 +9,9 @@ use Illuminate\Support\Facades\Response;
 use Illuminate\Support\Facades\Validator;
 use GuzzleHttp\Client;
 use Illuminate\Support\Facades\Input;
+use Location\Coordinate;
+use Location\Polygon;
+use Location\Formatter\Polygon\GeoJSON;
 
 class ApiController extends Controller
 {
@@ -364,7 +367,22 @@ class ApiController extends Controller
             }
         }
 
-        dd($result);
+        $temp = json_decode('{"type":"FeatureCollection","features":[{"type":"Feature","properties":{},"geometry":{"type":"Polygon","coordinates":[[[51.38031005859375,35.81001773806242],[51.25877380371093,35.77102915686019],[51.137237548828125,35.76824352632614],[51.10702514648437,35.74261114799056],[51.13037109374999,35.70805009803191],[51.23268127441406,35.65227488233256],[51.309585571289055,35.60483530498859],[51.375503540039055,35.60204386504707],[51.373443603515625,35.561277754384555],[51.458587646484375,35.5439598420039],[51.52793884277343,35.61600009092947],[51.52793884277343,35.70749253887843],[51.62200927734375,35.712510430860604],[51.639862060546875,35.758214448574186],[51.53617858886719,35.80222155213377],[51.46476745605469,35.827834717743585],[51.38031005859375,35.81001773806242]]]}}]}');
+        $geofence = new Polygon();
+
+        foreach ($temp->features as $key => $value){
+            foreach ($value->geometry->coordinates as $k => $val){
+                foreach ($val as $k1 => $val1) {
+                    $geofence->addPoint(new Coordinate($val1[1],$val1[0]));
+                    $result['coordinates'][$k1] = [$val1[1],$val1[0]];
+                }
+            }
+        }
+
+        $point = new Coordinate($lat,$lng);
+
+        $result['check'] = $geofence->contains($point);
+
         return json_encode($result);
 
     }

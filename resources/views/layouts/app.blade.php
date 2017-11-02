@@ -80,10 +80,14 @@
 
         google.maps.event.addDomListener(window, 'load', new function() {
             setTimeout(function () {
+                var flag = 0;
+                var triangleCoords = [
+                    {lat: 35.81001773806242, lng: 51.38031005859375}
+                ];
+
+                //when user click move marker & check polygon
                 google.maps.event.addListener(maps[0].map, 'click', function(event) {
                     maps[0].markers[0].setPosition(event.latLng);
-                    maps[0].map.setCenter({lat: event.latLng.lat(), lng: event.latLng.lng()});
-                    maps[0].map.setZoom(18);
 
                     $.ajax({
                         type: "GET",
@@ -96,15 +100,65 @@
                         dataType : 'json',
 
                         success: function(result){
+                            console.log(result);
                             var lat = parseFloat(result.data.lat);
                             var lng = parseFloat(result.data.lng);
 
                             var location = {lat: lat, lng: lng};
 
+                            //set marker
                             var marker = new google.maps.Marker({
                                 position: location,
                                 setMap: maps[0]
                             });
+
+                            //check polygon
+//                            var check = google.maps.geometry.poly.containsLocation(event.latLng, myPolygon);
+//
+                            if(result.check){
+                                maps[0].map.setCenter({lat: event.latLng.lat(), lng: event.latLng.lng()});
+                                maps[0].map.setZoom(18);
+
+                                if(flag == 1){
+                                    myPolygon = new google.maps.Polygon({
+                                        paths: triangleCoords,
+                                        draggable: false,
+                                        strokeColor: '#ff0000',
+                                        strokeOpacity: 0.8,
+                                        strokeWeight: 2,
+                                        fillColor: '#ff0000',
+                                        fillOpacity: 0.35,
+                                        visible: false
+                                    });
+                                    myPolygon.setMap(maps[0].map);
+
+                                    flag = 0;
+                                }
+                            }else{
+                                $.each(result.coordinates, function (key, value) {
+                                    triangleCoords.push({
+                                        lat: value[0],
+                                        lng: value[1]
+                                    });
+                                });
+
+                                // Styling & Controls
+                                if(flag == 0) {
+                                    myPolygon = new google.maps.Polygon({
+                                        paths: triangleCoords,
+                                        draggable: false,
+                                        strokeColor: '#ff0000',
+                                        strokeOpacity: 0.8,
+                                        strokeWeight: 2,
+                                        fillColor: '#ff0000',
+                                        fillOpacity: 0.35,
+                                        visible: true
+                                    });
+                                    //myPolygon.setMap(maps[0].map);
+
+                                    flag = 1;
+                                }
+                            }
 
 //                            $.each(result.cars ,function (key,value) {
 ////                                var lat = parseFloat(35.75986646);
