@@ -386,4 +386,16 @@ class ApiController extends Controller
         return json_encode($result);
 
     }
+
+    public function draw()
+    {
+        return view('draw');
+    }
+
+    public function set_coordinate()
+    {
+        $data = Input::get('result');
+
+        return json_encode($data);
+    }
 }

@@ -100,7 +100,6 @@
                         dataType : 'json',
 
                         success: function(result){
-                            console.log(result);
                             var lat = parseFloat(result.data.lat);
                             var lng = parseFloat(result.data.lng);
 
@@ -114,7 +113,9 @@
 
                             //check polygon
 //                            var check = google.maps.geometry.poly.containsLocation(event.latLng, myPolygon);
-//
+
+                            console.log(result.check);
+
                             if(result.check){
                                 maps[0].map.setCenter({lat: event.latLng.lat(), lng: event.latLng.lng()});
                                 maps[0].map.setZoom(18);
@@ -154,7 +155,7 @@
                                         fillOpacity: 0.35,
                                         visible: true
                                     });
-                                    //myPolygon.setMap(maps[0].map);
+                                   // myPolygon.setMap(maps[0].map);
 
                                     flag = 1;
                                 }
