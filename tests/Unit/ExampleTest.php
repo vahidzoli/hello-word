@@ -16,6 +16,11 @@ class ExampleTest extends TestCase
      */
     public function testBasicTest()
     {
-        $this->get('/api/set');
+//        $this->get('/api/ajax', ['lat' => '35.7600092958542','lng' => '51.509870348870754']);
+
+        $response = $this->json('get', '/api/ajax', ['lat' => '35.7600092958542','lng' => '51.509870348870754']);
+
+//        $response
+//            ->assertStatus(200);
     }
 }
