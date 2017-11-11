@@ -162,13 +162,16 @@ return [
         Illuminate\Translation\TranslationServiceProvider::class,
         Illuminate\Validation\ValidationServiceProvider::class,
         Illuminate\View\ViewServiceProvider::class,
-
+        Illuminate\Database\DatabaseServiceProvider::class,
         /*
          * Package Service Providers...
          */
         Laravel\Tinker\TinkerServiceProvider::class,
         Cornford\Googlmapper\MapperServiceProvider::class,
         NotificationChannels\PusherPushNotifications\PusherPushNotificationsServiceProvider::class,
+        ElevenLab\GeoLaravel\DatabaseServiceProvider::class,
+        'Phaza\LaravelPostgis\DatabaseServiceProvider',
+
         /*
          * Application Service Providers...
          */
@@ -228,6 +231,7 @@ return [
         'View' => Illuminate\Support\Facades\View::class,
 
         'Mapper' => Cornford\Googlmapper\Facades\MapperFacade::class,
+        'GeoModel'      => ElevenLab\GeoLaravel\Model::class,
 
     ],
 

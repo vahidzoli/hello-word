@@ -51,6 +51,7 @@ Route::group(['prefix' => '/api'], function () {
 
 
     Route::get('ajax' , 'ApiController@ajax');
+    Route::get('base' , 'ApiController@base');
 
     Route::get('draw' , 'ApiController@draw');
     Route::get('set' , 'ApiController@set_coordinate');
