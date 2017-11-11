@@ -18,6 +18,10 @@ Route::get('/', function () {
 Auth::routes();
 
 //Route::get('/home', 'HomeController@index')->name('home');
+Route::get('near','ApiController@nearby');
+
+//show form
+//Route::get('add' , 'ApiController@add');
 
 
 Route::group(['prefix' => '/api'], function () {
@@ -25,34 +29,30 @@ Route::group(['prefix' => '/api'], function () {
     //Menu
     Route::get('/', 'ApiController@index');
 
-    //show form
-    Route::get('add' , 'ApiController@add');
-
-    //edit form
-    Route::get('edit/{id}' , 'ApiController@edit');
-
-    //create new location
-    Route::post('loc', 'ApiController@create');
-
     //location list
     Route::get('loc', 'ApiController@show_list');
 
     //show one location
     Route::get('loc/{id}' , 'ApiController@show_one');
 
-    //update one location
-    Route::PUT('edit/{id}/update' , 'ApiController@update');
-
-    //delete one direction
-    Route::DELETE('loc/{id}/delete' , 'ApiController@destroy');
-
-    //show near car on map
-    Route::get('near' , 'ApiController@nearby');
-
-
+    //result without db used
     Route::get('ajax' , 'ApiController@ajax');
+
+    //result when retrieve data from database
     Route::get('base' , 'ApiController@base');
 
-    Route::get('draw' , 'ApiController@draw');
-    Route::get('set' , 'ApiController@set_coordinate');
+//    Route::get('draw' , 'ApiController@draw');
+//    Route::get('set' , 'ApiController@set_coordinate');
+
+//    //edit form
+//    Route::get('edit/{id}' , 'ApiController@edit');
+//
+//    //create new location
+//    Route::post('loc', 'ApiController@create');
+//
+//    //update one location
+//    Route::PUT('edit/{id}/update' , 'ApiController@update');
+//
+//    //delete one direction
+//    Route::DELETE('loc/{id}/delete' , 'ApiController@destroy');
 });

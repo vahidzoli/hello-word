@@ -110,105 +110,105 @@
                                 setMap: maps[0]
                             });
 
-                            console.log(result);
-                            $.each(result.check , function (key,value) {
-                                if(value === true){
-                                    maps[0].map.setCenter({lat: event.latLng.lat(), lng: event.latLng.lng()});
-                                    maps[0].map.setZoom(18);
+//                            console.log(result);
+//                            $.each(result.check , function (key,value) {
+//                                if(value === true){
+//                                    maps[0].map.setCenter({lat: event.latLng.lat(), lng: event.latLng.lng()});
+//                                    maps[0].map.setZoom(18);
+//
+//                                }else{
+//                                    triangleInnerCoords = [];
+//                                    //triangleOuterCoords = [];
+//                                    $.each(result.innercoordinates, function (key, value) {
+//                                        var data = [];
+//                                        $.each(value , function (k,val) {
+//                                            data.push({
+//                                                lat: val[0],
+//                                                lng: val[1]
+//                                            });
+//                                        });
+//                                        triangleInnerCoords.push(data);
+//                                    });
+//
+//                                    $.each(result.outercoordinates, function (key, value) {
+//                                        triangleOuterCoords.push({
+//                                            lat: value[0],
+//                                            lng: value[1]
+//                                        });
+//                                    });
+//                                    // Styling & Controls
+//                                    if(flag == 0) {
+//                                        $.each(triangleInnerCoords , function (key,value) {
+//                                            myPolygon = new google.maps.Polygon({
+//                                                paths: [value,triangleOuterCoords],
+//                                                draggable: false,
+//                                                strokeColor: '#ff0000',
+//                                                strokeOpacity: 0.8,
+//                                                strokeWeight: 2,
+//                                                fillColor: '#ff0000',
+//                                                fillOpacity: 0.35,
+//                                                visible: true
+//                                            });
+//                                            myPolygon.setMap(maps[0].map);
+//                                        });
+//
+//                                        flag = 1;
+//                                    }
+//                                }
+//                            });
+                            if(result.check){
+                                maps[0].map.setCenter({lat: event.latLng.lat(), lng: event.latLng.lng()});
+                                maps[0].map.setZoom(18);
 
-                                }else{
-                                    triangleInnerCoords = [];
-                                    //triangleOuterCoords = [];
-                                    $.each(result.innercoordinates, function (key, value) {
-                                        var data = [];
-                                        $.each(value , function (k,val) {
-                                            data.push({
-                                                lat: val[0],
-                                                lng: val[1]
-                                            });
-                                        });
-                                        triangleInnerCoords.push(data);
+                                if(flag == 1){
+                                    myPolygon = new google.maps.Polygon({
+                                        paths: [triangleInnerCoords,triangleOuterCoords],
+                                        draggable: false,
+                                        strokeColor: '#ff0000',
+                                        strokeOpacity: 0.8,
+                                        strokeWeight: 2,
+                                        fillColor: '#ff0000',
+                                        fillOpacity: 0.35,
+                                        visible: false
                                     });
+                                    myPolygon.setMap(maps[0].map);
 
-                                    $.each(result.outercoordinates, function (key, value) {
-                                        triangleOuterCoords.push({
-                                            lat: value[0],
-                                            lng: value[1]
-                                        });
-                                    });
-                                    // Styling & Controls
-                                    if(flag == 0) {
-                                        $.each(triangleInnerCoords , function (key,value) {
-                                            myPolygon = new google.maps.Polygon({
-                                                paths: [value,triangleOuterCoords],
-                                                draggable: false,
-                                                strokeColor: '#ff0000',
-                                                strokeOpacity: 0.8,
-                                                strokeWeight: 2,
-                                                fillColor: '#ff0000',
-                                                fillOpacity: 0.35,
-                                                visible: true
-                                            });
-                                            myPolygon.setMap(maps[0].map);
-                                        });
-
-                                        flag = 1;
-                                    }
+                                    flag = 0;
                                 }
-                            });
-//                            if(result.check){
-//                                maps[0].map.setCenter({lat: event.latLng.lat(), lng: event.latLng.lng()});
-//                                maps[0].map.setZoom(18);
-//
-//                                if(flag == 1){
-//                                    myPolygon = new google.maps.Polygon({
-//                                        paths: [triangleInnerCoords,triangleOuterCoords],
-//                                        draggable: false,
-//                                        strokeColor: '#ff0000',
-//                                        strokeOpacity: 0.8,
-//                                        strokeWeight: 2,
-//                                        fillColor: '#ff0000',
-//                                        fillOpacity: 0.35,
-//                                        visible: false
-//                                    });
-//                                    myPolygon.setMap(maps[0].map);
-//
-//                                    flag = 0;
-//                                }
-//                            }else{
-//                                triangleInnerCoords = [];
-//                                //triangleOuterCoords = [];
-//
-//                                $.each(result.innercoordinates, function (key, value) {
-//                                    triangleInnerCoords.push({
-//                                        lat: value[0],
-//                                        lng: value[1]
-//                                    });
-//                                });
-//
-//                                $.each(result.outercoordinates, function (key, value) {
-//                                    triangleOuterCoords.push({
-//                                        lat: value[0],
-//                                        lng: value[1]
-//                                    });
-//                                });
-//                                // Styling & Controls
-//                                if(flag == 0) {
-//                                    myPolygon = new google.maps.Polygon({
-//                                        paths: [triangleInnerCoords,triangleOuterCoords],
-//                                        draggable: false,
-//                                        strokeColor: '#ff0000',
-//                                        strokeOpacity: 0.8,
-//                                        strokeWeight: 2,
-//                                        fillColor: '#ff0000',
-//                                        fillOpacity: 0.35,
-//                                        visible: true
-//                                    });
-//                                    myPolygon.setMap(maps[0].map);
-//
-//                                    flag = 1;
-//                                }
-//                            }
+                            }else{
+                                triangleInnerCoords = [];
+                                //triangleOuterCoords = [];
+
+                                $.each(result.innercoordinates, function (key, value) {
+                                    triangleInnerCoords.push({
+                                        lat: value[0],
+                                        lng: value[1]
+                                    });
+                                });
+
+                                $.each(result.outercoordinates, function (key, value) {
+                                    triangleOuterCoords.push({
+                                        lat: value[0],
+                                        lng: value[1]
+                                    });
+                                });
+                                // Styling & Controls
+                                if(flag == 0) {
+                                    myPolygon = new google.maps.Polygon({
+                                        paths: [triangleInnerCoords,triangleOuterCoords],
+                                        draggable: false,
+                                        strokeColor: '#ff0000',
+                                        strokeOpacity: 0.8,
+                                        strokeWeight: 2,
+                                        fillColor: '#ff0000',
+                                        fillOpacity: 0.35,
+                                        visible: true
+                                    });
+                                    myPolygon.setMap(maps[0].map);
+
+                                    flag = 1;
+                                }
+                            }
 
                         }
                     });
